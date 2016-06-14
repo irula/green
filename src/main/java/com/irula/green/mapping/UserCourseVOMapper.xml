@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.irula.green.dao.UserCourseVOMapper" >
+  <resultMap id="BaseResultMap" type="com.irula.green.model.UserCourseVO" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="course_id" property="courseId" jdbcType="INTEGER" />
+    <result column="date_create" property="dateCreate" jdbcType="TIMESTAMP" />
+    <result column="date_update" property="dateUpdate" jdbcType="TIMESTAMP" />
+    <result column="date_delete" property="dateDelete" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, course_id, date_create, date_update, date_delete
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_course
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user_course
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.irula.green.model.UserCourseVO" >
+    insert into user_course (id, user_id, course_id, 
+      date_create, date_update, date_delete
+      )
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{courseId,jdbcType=INTEGER}, 
+      #{dateCreate,jdbcType=TIMESTAMP}, #{dateUpdate,jdbcType=TIMESTAMP}, #{dateDelete,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.irula.green.model.UserCourseVO" >
+    insert into user_course
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="courseId != null" >
+        course_id,
+      </if>
+      <if test="dateCreate != null" >
+        date_create,
+      </if>
+      <if test="dateUpdate != null" >
+        date_update,
+      </if>
+      <if test="dateDelete != null" >
+        date_delete,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="courseId != null" >
+        #{courseId,jdbcType=INTEGER},
+      </if>
+      <if test="dateCreate != null" >
+        #{dateCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dateUpdate != null" >
+        #{dateUpdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dateDelete != null" >
+        #{dateDelete,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.irula.green.model.UserCourseVO" >
+    update user_course
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="courseId != null" >
+        course_id = #{courseId,jdbcType=INTEGER},
+      </if>
+      <if test="dateCreate != null" >
+        date_create = #{dateCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dateUpdate != null" >
+        date_update = #{dateUpdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dateDelete != null" >
+        date_delete = #{dateDelete,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.irula.green.model.UserCourseVO" >
+    update user_course
+    set user_id = #{userId,jdbcType=INTEGER},
+      course_id = #{courseId,jdbcType=INTEGER},
+      date_create = #{dateCreate,jdbcType=TIMESTAMP},
+      date_update = #{dateUpdate,jdbcType=TIMESTAMP},
+      date_delete = #{dateDelete,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
